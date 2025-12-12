@@ -4,6 +4,9 @@ import CategoryBreakdown from '@/components/dashboard/CategoryBreakdown';
 import RecentExpenses from '@/components/dashboard/RecentExpenses';
 import SpendingChart from '@/components/dashboard/SpendingChart';
 import MonthlyTrend from '@/components/dashboard/MonthlyTrend';
+import BudgetTracker from '@/components/dashboard/BudgetTracker';
+import MonthComparison from '@/components/dashboard/MonthComparison';
+import QuickInsights from '@/components/dashboard/QuickInsights';
 
 export default function Home() {
   return (
@@ -16,6 +19,19 @@ export default function Home() {
         </div>
 
         <SummaryCards />
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+          <div className="lg:col-span-2">
+            <BudgetTracker />
+          </div>
+          <div className="lg:col-span-1">
+            <MonthComparison />
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <QuickInsights />
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <CategoryBreakdown />

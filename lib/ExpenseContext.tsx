@@ -1,9 +1,9 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Expense, ExpenseFormData, ExpenseSummary } from '@/types';
-import { storage } from '@/utils/storage';
-import { calculateSummary, sortExpensesByDate } from '@/utils/calculations';
+import { Expense, ExpenseFormData, ExpenseSummary, CategoryBudget, MonthComparison, QuickInsights, ExpenseCategory } from '@/types';
+import { storage, budgetStorage } from '@/utils/storage';
+import { calculateSummary, sortExpensesByDate, calculateMonthComparison, calculateQuickInsights, getCategoryBudgetProgress } from '@/utils/calculations';
 
 interface ExpenseContextType {
   expenses: Expense[];
@@ -13,6 +13,19 @@ interface ExpenseContextType {
   updateExpense: (id: string, formData: ExpenseFormData) => void;
   deleteExpense: (id: string) => void;
   getExpenseById: (id: string) => Expense | undefined;
+  budgets: CategoryBudget[];
+  budgetProgress: Array<{
+    category: ExpenseCategory;
+    spent: number;
+    limit: number;
+    remaining: number;
+    percentage: number;
+    status: 'safe' | 'warning' | 'danger';
+  }>;
+  monthComparison: MonthComparison;
+  quickInsights: QuickInsights;
+  setBudget: (category: ExpenseCategory, limit: number) => void;
+  removeBudget: (category: ExpenseCategory) => void;
 }
 
 const ExpenseContext = createContext<ExpenseContextType | undefined>(undefined);
@@ -27,11 +40,14 @@ export const useExpenses = () => {
 
 export const ExpenseProvider = ({ children }: { children: ReactNode }) => {
   const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [budgets, setBudgets] = useState<CategoryBudget[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadedExpenses = storage.getExpenses();
+    const loadedBudgets = budgetStorage.getBudgets();
     setExpenses(sortExpensesByDate(loadedExpenses));
+    setBudgets(loadedBudgets.budgets);
     setIsLoading(false);
   }, []);
 
@@ -74,7 +90,22 @@ export const ExpenseProvider = ({ children }: { children: ReactNode }) => {
     return expenses.find(exp => exp.id === id);
   };
 
+  const setBudget = (category: ExpenseCategory, limit: number) => {
+    budgetStorage.updateCategoryBudget(category, limit);
+    const updatedBudgets = budgetStorage.getBudgets();
+    setBudgets(updatedBudgets.budgets);
+  };
+
+  const removeBudget = (category: ExpenseCategory) => {
+    budgetStorage.removeCategoryBudget(category);
+    const updatedBudgets = budgetStorage.getBudgets();
+    setBudgets(updatedBudgets.budgets);
+  };
+
   const summary = calculateSummary(expenses);
+  const budgetProgress = getCategoryBudgetProgress(expenses, budgets);
+  const monthComparison = calculateMonthComparison(expenses);
+  const quickInsights = calculateQuickInsights(expenses);
 
   const value: ExpenseContextType = {
     expenses,
@@ -84,6 +115,12 @@ export const ExpenseProvider = ({ children }: { children: ReactNode }) => {
     updateExpense,
     deleteExpense,
     getExpenseById,
+    budgets,
+    budgetProgress,
+    monthComparison,
+    quickInsights,
+    setBudget,
+    removeBudget,
   };
 
   return (
