@@ -38,3 +38,31 @@ export interface FilterOptions {
   category?: ExpenseCategory | 'All';
   searchTerm?: string;
 }
+
+export interface CategoryBudget {
+  category: ExpenseCategory;
+  monthlyLimit: number;
+}
+
+export interface BudgetSettings {
+  budgets: CategoryBudget[];
+  lastUpdated: string;
+}
+
+export interface MonthComparison {
+  currentMonth: number;
+  previousMonth: number;
+  percentageChange: number;
+  isIncrease: boolean;
+}
+
+export interface QuickInsights {
+  averageDailySpend: number;
+  largestExpense: {
+    amount: number;
+    description: string;
+    category: ExpenseCategory;
+  } | null;
+  daysSinceLastExpense: number;
+  mostFrequentCategory: ExpenseCategory | null;
+}
