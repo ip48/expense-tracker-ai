@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useExpenses } from '@/lib/ExpenseContext';
 import { formatCurrency, formatDate } from '@/utils/formatters';
 import { getCategoryColor, filterExpenses } from '@/utils/calculations';
-import { exportToCSV } from '@/utils/export';
+import { exportToCSV, exportToMarkdown } from '@/utils/export';
 import { ExpenseCategory } from '@/types';
 import ExpenseFilters from './ExpenseFilters';
 
@@ -33,8 +33,12 @@ export default function ExpenseList() {
     setDeleteConfirm(null);
   };
 
-  const handleExport = () => {
+  const handleExportCSV = () => {
     exportToCSV(filteredExpenses);
+  };
+
+  const handleExportMarkdown = () => {
+    exportToMarkdown(filteredExpenses);
   };
 
   const handleReset = () => {
@@ -73,9 +77,14 @@ export default function ExpenseList() {
             </p>
           </div>
           {filteredExpenses.length > 0 && (
-            <button onClick={handleExport} className="btn-secondary text-sm">
-              📥 Export CSV
-            </button>
+            <div className="flex gap-2">
+              <button onClick={handleExportCSV} className="btn-secondary text-sm">
+                📊 CSV
+              </button>
+              <button onClick={handleExportMarkdown} className="btn-secondary text-sm">
+                📝 Markdown
+              </button>
+            </div>
           )}
         </div>
 
