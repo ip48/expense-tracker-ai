@@ -1,7 +1,13 @@
-# CLAUDE Project Documentation
-This document outlines the purpose and usage of the CLAUDE project, which serves as a demo application showcasing various features and functionalities.
+# Expense Tracker AI
 
-Keep not too complecated. This is a demo project.
-Prefere using existing public libraries for components and functionalities whenever posible rather than something very comlicated implimented from screch.
+Demo expense tracking app with budget management and analytics.
 
-When asking to preform a command or a promt, if there is something weird, like reference to empty file, please bring it up before continiue.
+## Development Philosophy
+- **Keep it simple**: This is a demo project - avoid over-engineering
+- **Use established libraries**: Prefer battle-tested libraries (like Recharts) over custom implementations
+- **Question anomalies**: If something seems off (empty files, weird references), ask before proceeding
+
+## Architecture
+- **Client-side only**: All components use 'use client' - no server-side rendering for data
+- **No database**: LocalStorage only (utils/storage.ts) - don't build complex persistence
+- **USD hardcoded**: Currency formatting is US dollars only - no internationalization planned
