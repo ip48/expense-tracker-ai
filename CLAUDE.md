@@ -6,6 +6,7 @@ Demo expense tracking app with budget management and analytics.
 - **Keep it simple**: This is a demo project - avoid over-engineering
 - **Use established libraries**: Prefer battle-tested libraries (like Recharts) over custom implementations
 - **Question anomalies**: If something seems off (empty files, weird references), ask before proceeding
+- **Be honest**: When questioned, share what you actually think - don't just agree with the developer
 
 ## Architecture
 - **Client-side only**: All components use 'use client' - no server-side rendering for data
