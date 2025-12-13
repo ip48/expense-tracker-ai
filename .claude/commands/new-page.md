@@ -1,45 +1,24 @@
-# Create New Page
+Create a new page/route for: $ARGUMENTS
 
-Scaffold a new page/route following project conventions.
+## Workflow
 
-## Instructions
+1. **Create the page file first**
+   - Location: `app/$ARGUMENTS/page.tsx`
+   - Follow the pattern from existing pages:
+     - `app/expenses/page.tsx` - standard layout with title/description
+     - `app/insights/page.tsx` - narrower layout (max-w-4xl)
+     - `app/add-expense/page.tsx` - minimal (no title section)
+   - Copy structure from the most appropriate example
 
-Takes one argument: the route name (e.g., "settings", "profile", "analytics")
-
-1. **Create page file**:
-   - Create `app/[route-name]/page.tsx`
-   - Use this template structure:
+2. **Ask about navigation**
+   - After creating the page, ask user: "Add this route to the navigation menu?"
+   - If yes: Update `components/ui/Navigation.tsx` links array with:
      ```tsx
-     import Navigation from '@/components/ui/Navigation';
-
-     export default function [RouteName]Page() {
-       return (
-         <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-           <Navigation />
-           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-             <div className="mb-8">
-               <h1 className="text-4xl font-bold text-gray-900 mb-2">[Page Title]</h1>
-               <p className="text-gray-600">[Page description]</p>
-             </div>
-
-             {/* Page content goes here */}
-             <div className="card">
-               <p>Content coming soon...</p>
-             </div>
-           </div>
-         </main>
-       );
-     }
+     { href: '/$ARGUMENTS', label: 'Label', icon: '📊' }
      ```
+   - If no: Skip navigation update
 
-2. **Remind about Navigation**:
-   - Tell user they need to manually add route to Navigation.tsx if desired
-   - Show example of what to add to the links array
-
-3. **Summary**:
-   - Confirm what was created
-   - Show next steps
-
-## Example Usage
-- `/new-page settings` → creates app/settings/page.tsx
-- `/new-page user-profile` → creates app/user-profile/page.tsx
+3. **Confirm completion**
+   - Show what was created
+   - Confirm whether navigation was updated
+   - List file path(s) modified

@@ -1,42 +1,27 @@
-# Feature Review
+Please review the following feature/component for code quality and adherence to project principles: $ARGUMENTS
 
-Review a specific feature, component, or file for code quality, bugs, and improvements.
+## Review Process
 
-## Instructions
+1. **Locate and read the code**
+   - Find the main file(s) for: $ARGUMENTS
+   - Read related files (types, utilities, tests) as needed
 
-Takes one argument: feature/component/file name to review
+2. **Check against CLAUDE.md philosophy**
+   - Is this too complex? Could it be simpler?
+   - Should we use an established library instead of custom code?
+   - Does it respect demo constraints (client-side only, LocalStorage)?
 
-### 1. Locate the Code
-- Find the main file(s) related to the feature
-- If feature name is ambiguous, ask for clarification
-- Example: `feature-review MonthlyInsights` → find MonthlyInsights.tsx
+3. **Review code quality**
+   - Bugs and edge cases
+   - React/TypeScript best practices
+   - Performance issues
+   - Security vulnerabilities
+   - Accessibility concerns
 
-### 2. Read and Analyze
-- Read the component/feature code
-- Read related files (types, utilities, etc.) if needed
-- Understand what the code does
+4. **Provide honest feedback**
+   - ✅ What's done well
+   - ⚠️ Issues found (critical/moderate/minor)
+   - 💡 Specific suggestions with code examples
+   - Overall assessment and priority fixes
 
-### 3. Review for:
-- **Bugs**: Logic errors, edge cases, potential crashes
-- **Best Practices**: React patterns, TypeScript usage, proper hooks
-- **Performance**: Unnecessary re-renders, expensive calculations
-- **Code Quality**: Readability, maintainability, organization
-- **Project Conventions**: Following CLAUDE.md guidelines
-- **Security**: Potential vulnerabilities, input validation
-- **Accessibility**: Missing aria labels, keyboard navigation
-
-### 4. Provide Feedback
-- ✅ What's done well
-- ⚠️ Issues found (with severity: critical/moderate/minor)
-- 💡 Suggestions for improvement
-- 🔧 Specific code examples for fixes (if applicable)
-
-### 5. Summary
-- Overall assessment
-- Priority fixes (if any)
-- Optional improvements
-
-## Example Usage
-- `/feature-review MonthlyInsights`
-- `/feature-review BudgetTracker`
-- `/feature-review utils/calculations`
+Be direct and honest - don't just agree if you see issues.
