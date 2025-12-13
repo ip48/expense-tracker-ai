@@ -9,6 +9,7 @@ export default function Navigation() {
   const links = [
     { href: '/', label: 'Dashboard', icon: '📊' },
     { href: '/expenses', label: 'Expenses', icon: '💰' },
+    { href: '/insights', label: 'Insights', icon: '📈' },
     { href: '/add-expense', label: 'Add Expense', icon: '➕' },
   ];
 
